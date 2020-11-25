@@ -18,6 +18,10 @@ public class MetropolitanCenterEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int centerId;
 
+    @ManyToOne
+    @JoinColumn(name="metrospace_no")
+    private MetrospaceEntity metrospaceEntity;
+
     @Column(length = 50, nullable = false)
     private String centerNum;
 

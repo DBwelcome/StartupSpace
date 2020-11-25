@@ -17,6 +17,10 @@ public class ProvincialCenterEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int centerId;
 
+    @ManyToOne
+    @JoinColumn(name="provspace_no")
+    private ProvspaceEntity provspaceEntity;
+
     @Column(length = 50, nullable = false)
     private String centerNum;
 
