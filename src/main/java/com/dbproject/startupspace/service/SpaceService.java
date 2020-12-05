@@ -33,14 +33,14 @@ public class SpaceService {
         int i = 0;
         for (MetrospaceEntity metrospaceEntity : metrospaceEntities) {
             SpaceDTO spaceDto = SpaceDTO.create(
-                    metrospaceEntity.getSpaceId(), metrospaceEntity.getCenterId(),
+                    metrospaceEntity.getSpaceId(), metrospaceEntity.getMetropolitanCenterEntity().getCenterId(),
                     metrospaceEntity.getSpaceName(), metrospaceEntity.getSpaceType(),
                     metrospaceEntity.getSeatType(), metrospaceEntity.getSeatSize(),
                     metrospaceEntity.getExclusiveArea(), metrospaceEntity.getPublicArea(),
                     metrospaceEntity.getRent(), metrospaceEntity.getDeposit(),
                     metrospaceEntity.getTenant(), metrospaceEntity.getScore());
             MetropolitanCenterEntity metropolitanCenterEntity =
-                    metropolitanCenterEntityRepository.findById(metrospaceEntity.getCenterId()).get();
+                    metropolitanCenterEntityRepository.findById(metrospaceEntity.getMetropolitanCenterEntity().getCenterId()).get();
             initSpacesDTOs.add(InitSpacesDTO.createMetroSpace(spaceDto, metropolitanCenterEntity));
             i++;
             if (i == 3) {
@@ -50,14 +50,14 @@ public class SpaceService {
         i = 0;
         for (ProvspaceEntity provspaceEntity : provspaceEntities) {
             SpaceDTO spaceDto = SpaceDTO.create(
-                    provspaceEntity.getSpaceId(), provspaceEntity.getCenterId(),
+                    provspaceEntity.getSpaceId(), provspaceEntity.getProvincialCenterEntity().getCenterId(),
                     provspaceEntity.getSpaceName(), provspaceEntity.getSpaceType(),
                     provspaceEntity.getSeatType(), provspaceEntity.getSeatSize(),
                     provspaceEntity.getExclusiveArea(), provspaceEntity.getPublicArea(),
                     provspaceEntity.getRent(), provspaceEntity.getDeposit(),
                     provspaceEntity.getTenant(), provspaceEntity.getScore());
             ProvincialCenterEntity provincialCenterEntity =
-                    provincialCenterEntityRepository.findById(provspaceEntity.getCenterId()).get();
+                    provincialCenterEntityRepository.findById(provspaceEntity.getProvincialCenterEntity().getCenterId()).get();
             initSpacesDTOs.add(InitSpacesDTO.createProvinceSpace(spaceDto, provincialCenterEntity));
             i++;
             if (i == 3) {

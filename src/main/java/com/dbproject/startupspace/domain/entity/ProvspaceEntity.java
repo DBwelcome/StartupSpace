@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -17,8 +19,9 @@ public class ProvspaceEntity {
     @Id
     private Integer spaceId;
 
-    @Column(nullable = false)
-    private Integer centerId;
+    @ManyToOne
+    @JoinColumn(name = "center_id")
+    private ProvincialCenterEntity provincialCenterEntity;
 
     @Column(length = 50)
     private String spaceName;
@@ -50,11 +53,35 @@ public class ProvspaceEntity {
     @Column
     private int score;
 
+    @PreUpdate
+    public void onPreUpdate() throws ParseException {
+        if(Float.parseFloat(exclusiveArea) == 0.0) {
+            score = 0;
+            return;
+        }
+        if (rent.equals("0"))
+            score = 1000;
+        else
+            score = (int) (NumberFormat.getNumberInstance().parse(rent).longValue()/ (Float.parseFloat(exclusiveArea) * 1000));
+    }
+
+    @PrePersist
+    public void onPrePersist() throws ParseException {
+        if(Float.parseFloat(exclusiveArea) == 0.0) {
+            score = 0;
+            return;
+        }
+        if (rent.equals("0"))
+            score = 1000;
+        else
+            score = (int) (NumberFormat.getNumberInstance().parse(rent).longValue()/ (Float.parseFloat(exclusiveArea) * 1000));
+    }
+
     @Builder
-    public ProvspaceEntity(Integer spaceId, Integer centerId, String spaceName, String spaceType, String seatType, String seatSize,
-                            String exclusiveArea, String publicArea, String rent, String deposit, String tenant, int score){
+    public ProvspaceEntity(Integer spaceId, ProvincialCenterEntity provincialCenterEntity, String spaceName, String spaceType, String seatType, String seatSize,
+                           String exclusiveArea, String publicArea, String rent, String deposit, String tenant, int score){
         this.spaceId = spaceId;
-        this.centerId = centerId;
+        this.provincialCenterEntity = provincialCenterEntity;
         this.spaceName = spaceName;
         this.spaceType = spaceType;
         this.seatType = seatType;
