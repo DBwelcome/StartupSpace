@@ -70,6 +70,8 @@ public class SpaceService {
         return initSpacesDTOs;
     }
 
+
+
     public List<InitSpacesDTO> searchSpace(String region, String exclusiveArea, String Age,
                                            String rentCost, String spaceType, String vacantRoomCount) {
         List<MetrospaceEntity> metrospaceEntities = metrospaceEntityRepository.findAll();
@@ -112,8 +114,8 @@ public class SpaceService {
             if(vacantRoomCount != null){
                 vrc2 = parseInt(vacantRoomCount);
             }
-            if((exclusiveArea == null || (e >= ea && e <= ea + 10)) && (r == region || region == null) && (Age == null || age == Age)
-                    && (rentCost == null || (rc >= rr && rc <= rr + 100000)) && (st == spaceType || spaceType == null)
+            if((exclusiveArea == null || (e >= ea && e <= ea + 10)) && (r.equals(region) || region == null) && (Age == null || age.equals(Age))
+                    && (rentCost == null || (rc >= rr && rc <= rr + 100000)) && (st.equals(spaceType) || spaceType == null)
                     && (vacantRoomCount == null || (vrc >= vrc2 && vrc <= vrc2 + 10))){
                 initSpacesDTOs.add(InitSpacesDTO.createMetroSpace(spaceDto, metropolitanCenterEntity));
             }
@@ -155,8 +157,8 @@ public class SpaceService {
             if(vacantRoomCount != null){
                 vrc2 = parseInt(vacantRoomCount);
             }
-            if((exclusiveArea == null || (e >= ea && e <= ea + 10)) && (r == region || region == null) && (Age == null || age == Age)
-                    && (rentCost == null || (rc >= rr && rc <= rr + 100000)) && (st == spaceType || spaceType == null)
+            if((exclusiveArea == null || (e >= ea && e <= ea + 10)) && (r.equals(region)|| region == null) && (Age == null || age.equals(Age))
+                    && (rentCost == null || (rc >= rr && rc <= rr + 100000)) && (st.equals(spaceType) || spaceType == null)
                     && (vacantRoomCount == null || (vrc >= vrc2 && vrc <= vrc2 + 10))){
                 initSpacesDTOs.add(InitSpacesDTO.createProvinceSpace(spaceDto, provincialCenterEntity));
             }

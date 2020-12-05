@@ -30,14 +30,14 @@ public class StartupspaceController {
     }
 
     @GetMapping("/filter")
-    public List<InitSpacesDTO> search(Model model, @RequestParam(value="region", required = false) String region,
+    public List<InitSpacesDTO> search(@RequestParam(value="region", required = false) String region,
                                       @RequestParam(value="exclusiveArea", required = false) String exclusiveArea,
-                                      @RequestParam(value="age", required = false) String Age,
+                                      @RequestParam(value="age", required = false) String age,
                                       @RequestParam(value="rentCost", required = false) String rentCost,
                                       @RequestParam(value="spaceType", required = false) String spaceType,
                                       @RequestParam(value="vacantRoomCount", required = false) String vacantRoomCount){
-
-        return spaceService.searchSpace(region, exclusiveArea, Age, rentCost, spaceType, vacantRoomCount);
+        System.out.println(region);
+        return spaceService.searchSpace(region, exclusiveArea, age, rentCost, spaceType, vacantRoomCount);
     }
 }
 
