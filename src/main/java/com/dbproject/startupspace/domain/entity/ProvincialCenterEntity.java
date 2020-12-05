@@ -1,45 +1,42 @@
 package com.dbproject.startupspace.domain.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 @Entity
 @Table(name = "provincialcenter")
 public class ProvincialCenterEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int centerId;
+    private Integer centerId;
 
     @ManyToOne
     @JoinColumn(name="provspace_no")
     private ProvspaceEntity provspaceEntity;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String centerNum;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String centerType;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String buildingName;
 
-    @Column(nullable = false)
-    private int postNum;
+    @Column
+    private Integer postNum;
 
-    @Column(length = 100,nullable = false)
+    @Column(length = 100)
     private String address;
 
-    @Column(length = 12)
+    @Column(length = 40)
     private String telephone;
 
-    @Column(length = 12)
+    @Column(length = 40)
     private String fax;
 
     @Column(length = 100)
@@ -51,19 +48,19 @@ public class ProvincialCenterEntity {
     @Column(columnDefinition = "TEXT")
     private String centerIntro;
 
-    @Column(nullable = false)
-    private int spaceCount;
+    @Column
+    private Integer spaceCount;
 
-    @Column(length = 2)
+    @Column(length = 4)
     private String area;
 
-    @Column(nullable = false)
-    private int target;
+    @Column
+    private Integer target;
 
     @Builder
-    public ProvincialCenterEntity(int centerId, String centerNum, String centerType, String buildingName, int postNum,
+    public ProvincialCenterEntity(int centerId, String centerNum, String centerType, String buildingName, Integer postNum,
                                     String address, String telephone, String fax, String email, String homepage,
-                                    String centerIntro, int spaceCount, String area, int target){
+                                    String centerIntro, int spaceCount){
         this.centerId = centerId;
         this.centerNum = centerNum;
         this.centerType = centerType;
@@ -76,7 +73,6 @@ public class ProvincialCenterEntity {
         this.homepage = homepage;
         this.centerIntro = centerIntro;
         this.spaceCount = spaceCount;
-        this.area = area;
-        this.target = target;
+
     }
 }
