@@ -3,7 +3,9 @@ package com.dbproject.startupspace.domain.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
+@RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
@@ -12,11 +14,11 @@ import javax.persistence.*;
 public class ProvincialCenterEntity {
 
     @Id
+    @NonNull
     private Integer centerId;
 
-    @ManyToOne
-    @JoinColumn(name="provspace_no")
-    private ProvspaceEntity provspaceEntity;
+    @OneToMany(mappedBy = "provincialCenterEntity", cascade = CascadeType.REMOVE)
+    private List<ProvspaceEntity> provspaceEntity;
 
     @Column(length = 50)
     private String centerNum;
@@ -59,8 +61,8 @@ public class ProvincialCenterEntity {
 
     @Builder
     public ProvincialCenterEntity(int centerId, String centerNum, String centerType, String buildingName, Integer postNum,
-                                    String address, String telephone, String fax, String email, String homepage,
-                                    String centerIntro, int spaceCount){
+                                  String address, String telephone, String fax, String email, String homepage,
+                                  String centerIntro, int spaceCount){
         this.centerId = centerId;
         this.centerNum = centerNum;
         this.centerType = centerType;

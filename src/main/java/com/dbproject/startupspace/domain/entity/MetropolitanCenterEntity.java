@@ -4,8 +4,10 @@ package com.dbproject.startupspace.domain.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 
+@RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Setter
 @Getter
@@ -14,11 +16,11 @@ import javax.persistence.*;
 public class MetropolitanCenterEntity {
 
     @Id
+    @NonNull
     private Integer centerId;
 
-    @ManyToOne
-    @JoinColumn(name="metrospace_no")
-    private MetrospaceEntity metrospaceEntity;
+    @OneToMany(mappedBy = "metropolitanCenterEntity", cascade = CascadeType.REMOVE)
+    private List<MetrospaceEntity> metrospaceEntityList;
 
     @Column(length = 50)
     private String centerNum;
@@ -58,6 +60,7 @@ public class MetropolitanCenterEntity {
 
     @Column
     private Integer target;
+
 
     @Builder
     public MetropolitanCenterEntity(int centerId, String centerNum, String centerType, String buildingName, Integer postNum,
