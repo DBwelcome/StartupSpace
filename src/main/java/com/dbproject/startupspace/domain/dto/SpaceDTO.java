@@ -18,7 +18,7 @@ public class SpaceDTO {
     private String seatCompany;
     private Integer score;
 
-    @Builder
+    @Builder(builderMethodName = "of")
     public SpaceDTO(int spceId, int cnterId, String spceNm, String spceTyNm, String seatTyNm, String seatSeNm, String dvrAr,
                     String cmnuseAr, String rentAmt, String grntyAmt, String seatCompany, int score){
         this.spceId = spceId;
@@ -34,4 +34,23 @@ public class SpaceDTO {
         this.seatCompany = seatCompany;
         this.score = score;
     }
+
+    public static SpaceDTO create(int spceId, int cnterId, String spceNm, String spceTyNm, String seatTyNm, String seatSeNm, String dvrAr,
+                                  String cmnuseAr, String rentAmt, String grntyAmt, String seatCompany, int score) {
+        return SpaceDTO.of()
+                .spceId(spceId)
+                .cnterId(cnterId)
+                .spceNm(spceNm)
+                .spceTyNm(spceTyNm)
+                .seatTyNm(seatTyNm)
+                .seatSeNm(seatSeNm)
+                .dvrAr(dvrAr)
+                .cmnuseAr(cmnuseAr)
+                .rentAmt(rentAmt)
+                .grntyAmt(grntyAmt)
+                .seatCompany(seatCompany)
+                .score(score)
+                .build();
+    }
+
 }
