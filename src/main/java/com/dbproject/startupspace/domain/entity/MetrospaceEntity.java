@@ -15,11 +15,10 @@ import javax.persistence.*;
 public class MetrospaceEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long spaceId;
+    private Integer spaceId;
 
-    @Column(length=50, nullable = false)
-    private String centerId;
+    @Column(nullable = false)
+    private Integer centerId;
 
     @Column(length = 50)
     private String spaceName;
@@ -28,7 +27,7 @@ public class MetrospaceEntity {
     private String spaceType;
 
     @Column
-    private int seatType;
+    private String seatType;
 
     @Column(length = 100)
     private String seatSize;
@@ -52,7 +51,7 @@ public class MetrospaceEntity {
     private int score;
 
     @Builder
-    public MetrospaceEntity(Long spaceId, String centerId, String spaceName, String spaceType, int seatType, String seatSize,
+    public MetrospaceEntity(Integer spaceId, Integer centerId, String spaceName, String spaceType, String seatType, String seatSize,
                             String exclusiveArea, String publicArea, String rent, String deposit, String tenant, int score){
         this.spaceId = spaceId;
         this.centerId = centerId;
