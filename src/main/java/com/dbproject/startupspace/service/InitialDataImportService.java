@@ -1,11 +1,7 @@
 package com.dbproject.startupspace.service;
 
-import com.dbproject.startupspace.domain.dto.CenterDTO;
-import com.dbproject.startupspace.domain.dto.CenterListDTO;
 import com.dbproject.startupspace.domain.dto.SpaceDTO;
 import com.dbproject.startupspace.domain.dto.SpaceListDTO;
-import com.dbproject.startupspace.domain.entity.MetropolitanCenterEntity;
-import com.dbproject.startupspace.domain.entity.MetrospaceEntity;
 import com.dbproject.startupspace.domain.entity.ProvincialCenterEntity;
 import com.dbproject.startupspace.domain.entity.ProvspaceEntity;
 import com.dbproject.startupspace.repository.MetropolitanCenterEntityRepository;
@@ -13,7 +9,6 @@ import com.dbproject.startupspace.repository.MetrospaceEntityRepository;
 import com.dbproject.startupspace.repository.ProvincialCenterEntityRepository;
 import com.dbproject.startupspace.repository.ProvspaceEntityRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.UnknownContentTypeException;
@@ -30,15 +25,13 @@ import java.util.List;
 @Service
 public class InitialDataImportService {
 
-    @Autowired
-    private MetropolitanCenterEntityRepository metropolitanCenterEntityRepository;
-    @Autowired
-    private ProvincialCenterEntityRepository provincialCenterEntityRepository;
-    @Autowired
-    private MetrospaceEntityRepository metrospaceEntityRepository;
-    @Autowired
-    private ProvspaceEntityRepository provspaceEntityRepository;
+    private static final String baseUrl = "http://apis.data.go.kr";
+    private static final String serviceKey = "4diGvpxxl3AFrDekiPSCCXAlBkwmp2kQiJLE7Q0SLq5iIHb1fm0c5bbHhdkYP0hhM%2FQ9je0OAKRGvACpczieJQ%3D%3D";
 
+    private MetropolitanCenterEntityRepository metropolitanCenterEntityRepository;
+    private ProvincialCenterEntityRepository provincialCenterEntityRepository;
+    private MetrospaceEntityRepository metrospaceEntityRepository;
+    private ProvspaceEntityRepository provspaceEntityRepository;
 
     public void getInitialData() throws UnsupportedEncodingException {
 
@@ -146,8 +139,6 @@ public class InitialDataImportService {
     }
 
     public URI getAreaCenterListUri(String area) throws UnsupportedEncodingException {
-        String baseUrl = "http://apis.data.go.kr";
-        String serviceKey = "4diGvpxxl3AFrDekiPSCCXAlBkwmp2kQiJLE7Q0SLq5iIHb1fm0c5bbHhdkYP0hhM%2FQ9je0OAKRGvACpczieJQ%3D%3D";
 
         URI uri = UriComponentsBuilder.fromHttpUrl(baseUrl)
                 .path("/B552735/workspaceErumService/getAreaCenterList")
@@ -159,8 +150,6 @@ public class InitialDataImportService {
     }
 
     public URI getCenterSpaceListUri(int centerId) throws UnsupportedEncodingException {
-        String baseUrl = "http://apis.data.go.kr";
-        String serviceKey = "4diGvpxxl3AFrDekiPSCCXAlBkwmp2kQiJLE7Q0SLq5iIHb1fm0c5bbHhdkYP0hhM%2FQ9je0OAKRGvACpczieJQ%3D%3D";
 
         URI uri = UriComponentsBuilder.fromHttpUrl(baseUrl)
                 .path("/B552735/workspaceErumService/getCenterSpaceList")

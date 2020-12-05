@@ -13,8 +13,6 @@ public class StartupspaceController {
     @Autowired
     private InitialDataImportService initialDataImportService;
 
-
-
     @GetMapping("/getInitialData")
     public void get() throws UnsupportedEncodingException {
         initialDataImportService.getInitialData();
