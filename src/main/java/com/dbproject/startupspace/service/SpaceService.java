@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.lang.Float.parseFloat;
@@ -71,6 +72,9 @@ public class SpaceService {
                 break;
             }
         }
+
+        initSpacesDTOs.sort(Comparator.comparing(InitSpacesDTO::getScore).reversed());
+
         return initSpacesDTOs;
     }
 
@@ -169,6 +173,8 @@ public class SpaceService {
                 initSpacesDTOs.add(InitSpacesDTO.createProvinceSpace(spaceDto, provincialCenterEntity, emptySpaceCount));
             }
         }
+
+        initSpacesDTOs.sort(Comparator.comparing(InitSpacesDTO::getScore).reversed());
 
         return initSpacesDTOs;
     }
