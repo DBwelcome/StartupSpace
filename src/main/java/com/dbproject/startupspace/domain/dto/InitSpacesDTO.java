@@ -38,14 +38,14 @@ public class InitSpacesDTO {
         this.homepageUrl = homepageUrl;
     }
 
-    public static InitSpacesDTO createMetroSpace(SpaceDTO spaceDTO, MetropolitanCenterEntity metropolitanCenterEntity) {
+    public static InitSpacesDTO createMetroSpace(SpaceDTO spaceDTO, MetropolitanCenterEntity metropolitanCenterEntity, Integer notEmptyCount) {
         return InitSpacesDTO.of()
                 .name(metropolitanCenterEntity.getCenterNum())
                 .region(metropolitanCenterEntity.getArea())
                 .exclusiveArea(spaceDTO.getDvrAr())
                 .spaceType(spaceDTO.getSpceTyNm())
                 .age(getSpaceAge(metropolitanCenterEntity.getTarget()))
-                .vacantRoomCount(metropolitanCenterEntity.getSpaceCount())
+                .vacantRoomCount(metropolitanCenterEntity.getSpaceCount() - notEmptyCount)
                 .score(spaceDTO.getScore())
                 .rentCost(spaceDTO.getRentAmt())
                 .contactNum(metropolitanCenterEntity.getTelephone())
@@ -53,14 +53,14 @@ public class InitSpacesDTO {
                 .build();
     }
 
-    public static InitSpacesDTO createProvinceSpace(SpaceDTO spaceDTO, ProvincialCenterEntity provincialCenterEntity) {
+    public static InitSpacesDTO createProvinceSpace(SpaceDTO spaceDTO, ProvincialCenterEntity provincialCenterEntity, Integer notEmptyCount) {
         return InitSpacesDTO.of()
                 .name(provincialCenterEntity.getCenterNum())
                 .region(provincialCenterEntity.getArea())
                 .exclusiveArea(spaceDTO.getDvrAr())
                 .spaceType(spaceDTO.getSpceTyNm())
                 .age(getSpaceAge(provincialCenterEntity.getTarget()))
-                .vacantRoomCount(provincialCenterEntity.getSpaceCount())
+                .vacantRoomCount(provincialCenterEntity.getSpaceCount() - notEmptyCount)
                 .score(spaceDTO.getScore())
                 .rentCost(spaceDTO.getRentAmt())
                 .contactNum(provincialCenterEntity.getTelephone())

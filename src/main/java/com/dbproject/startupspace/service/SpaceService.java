@@ -44,7 +44,9 @@ public class SpaceService {
                     metrospaceEntity.getTenant(), metrospaceEntity.getScore());
             MetropolitanCenterEntity metropolitanCenterEntity =
                     metropolitanCenterEntityRepository.findById(metrospaceEntity.getMetropolitanCenterEntity().getCenterId()).get();
-            initSpacesDTOs.add(InitSpacesDTO.createMetroSpace(spaceDto, metropolitanCenterEntity));
+            Integer emptySpaceCount = metrospaceEntityRepository.findNotEmptySpaceCount(metropolitanCenterEntity.getCenterId());
+
+            initSpacesDTOs.add(InitSpacesDTO.createMetroSpace(spaceDto, metropolitanCenterEntity, emptySpaceCount));
             i++;
             if (i == 3) {
                 break;
@@ -61,7 +63,9 @@ public class SpaceService {
                     provspaceEntity.getTenant(), provspaceEntity.getScore());
             ProvincialCenterEntity provincialCenterEntity =
                     provincialCenterEntityRepository.findById(provspaceEntity.getProvincialCenterEntity().getCenterId()).get();
-            initSpacesDTOs.add(InitSpacesDTO.createProvinceSpace(spaceDto, provincialCenterEntity));
+            Integer emptySpaceCount = provspaceEntityRepository.findNotEmptySpaceCount(provincialCenterEntity.getCenterId());
+
+            initSpacesDTOs.add(InitSpacesDTO.createProvinceSpace(spaceDto, provincialCenterEntity, emptySpaceCount));
             i++;
             if (i == 3) {
                 break;
@@ -79,6 +83,9 @@ public class SpaceService {
         List<InitSpacesDTO> initSpacesDTOs = new ArrayList<>();
 
         for (MetrospaceEntity metrospaceEntity : metrospaceEntities) {
+            MetropolitanCenterEntity metropolitanCenterEntity =
+                    metropolitanCenterEntityRepository.findById(metrospaceEntity.getMetropolitanCenterEntity().getCenterId()).get();
+            Integer emptySpaceCount = metrospaceEntityRepository.findNotEmptySpaceCount(metropolitanCenterEntity.getCenterId());
             SpaceDTO spaceDto = SpaceDTO.create(
                     metrospaceEntity.getSpaceId(), metrospaceEntity.getMetropolitanCenterEntity().getCenterId(),
                     metrospaceEntity.getSpaceName(), metrospaceEntity.getSpaceType(),
@@ -86,8 +93,6 @@ public class SpaceService {
                     metrospaceEntity.getExclusiveArea(), metrospaceEntity.getPublicArea(),
                     metrospaceEntity.getRent(), metrospaceEntity.getDeposit(),
                     metrospaceEntity.getTenant(), metrospaceEntity.getScore());
-            MetropolitanCenterEntity metropolitanCenterEntity =
-                    metropolitanCenterEntityRepository.findById(metrospaceEntity.getMetropolitanCenterEntity().getCenterId()).get();
 
             String r = metropolitanCenterEntity.getArea();
             int e = (int)parseFloat(metrospaceEntity.getExclusiveArea());
@@ -117,7 +122,7 @@ public class SpaceService {
             if((exclusiveArea == null || (e >= ea && e <= ea + 10) || ea >= 50) && (r.equals(region) || region == null) && (Age == null || age.equals(Age))
                     && (rentCost == null || (rc >= rr && rc <= rr + 10) || rc >= 50) && (st.equals(spaceType) || spaceType == null)
                     && (vacantRoomCount == null || (vrc >= vrc2 && vrc <= vrc2 + 10) || vrc >= 50)){
-                initSpacesDTOs.add(InitSpacesDTO.createMetroSpace(spaceDto, metropolitanCenterEntity));
+                initSpacesDTOs.add(InitSpacesDTO.createMetroSpace(spaceDto, metropolitanCenterEntity, emptySpaceCount));
             }
         }
 
@@ -131,6 +136,7 @@ public class SpaceService {
                     provspaceEntity.getTenant(), provspaceEntity.getScore());
             ProvincialCenterEntity provincialCenterEntity =
                     provincialCenterEntityRepository.findById(provspaceEntity.getProvincialCenterEntity().getCenterId()).get();
+            Integer emptySpaceCount = provspaceEntityRepository.findNotEmptySpaceCount(provincialCenterEntity.getCenterId());
 
             String r = provincialCenterEntity.getArea();
             int e = (int)parseFloat(provspaceEntity.getExclusiveArea());
@@ -160,7 +166,7 @@ public class SpaceService {
             if((exclusiveArea == null || (e >= ea && e <= ea + 10) || e >= 50) && (r.equals(region)|| region == null) && (Age == null || age.equals(Age))
                     && (rentCost == null || (rc >= rr && rc <= rr + 10) || rc >= 50) && (st.equals(spaceType) || spaceType == null)
                     && (vacantRoomCount == null || (vrc >= vrc2 && vrc <= vrc2 + 10) || vrc >= 50)){
-                initSpacesDTOs.add(InitSpacesDTO.createProvinceSpace(spaceDto, provincialCenterEntity));
+                initSpacesDTOs.add(InitSpacesDTO.createProvinceSpace(spaceDto, provincialCenterEntity, emptySpaceCount));
             }
         }
 

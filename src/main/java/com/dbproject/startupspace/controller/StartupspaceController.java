@@ -36,7 +36,6 @@ public class StartupspaceController {
                                       @RequestParam(value="rentCost", required = false) String rentCost,
                                       @RequestParam(value="spaceType", required = false) String spaceType,
                                       @RequestParam(value="vacantRoomCount", required = false) String vacantRoomCount){
-        System.out.println(region);
         return spaceService.searchSpace(region, exclusiveArea, age, rentCost, spaceType, vacantRoomCount);
     }
 }
