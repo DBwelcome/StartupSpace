@@ -51,7 +51,7 @@ public class ProvspaceEntity {
     private String tenant;
 
     @Column
-    private int score;
+    private float score;
 
     @PreUpdate
     public void onPreUpdate() throws ParseException {
@@ -60,9 +60,9 @@ public class ProvspaceEntity {
             return;
         }
         if (rent.equals("0"))
-            score = 1000;
+            score = 10;
         else
-            score = (int) (NumberFormat.getNumberInstance().parse(rent).longValue()/ (Float.parseFloat(exclusiveArea) * 1000));
+            score = Float.parseFloat(exclusiveArea) / NumberFormat.getNumberInstance().parse(rent).longValue();
     }
 
     @PrePersist
@@ -72,9 +72,9 @@ public class ProvspaceEntity {
             return;
         }
         if (rent.equals("0"))
-            score = 1000;
+            score = 10;
         else
-            score = (int) (NumberFormat.getNumberInstance().parse(rent).longValue()/ (Float.parseFloat(exclusiveArea) * 1000));
+            score = Float.parseFloat(exclusiveArea) / NumberFormat.getNumberInstance().parse(rent).longValue();
     }
 
     @Builder

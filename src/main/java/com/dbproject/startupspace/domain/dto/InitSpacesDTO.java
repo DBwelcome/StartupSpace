@@ -17,7 +17,7 @@ public class InitSpacesDTO {
     private String exclusiveArea;
     private String spaceType;
     private Integer vacantRoomCount;
-    private Integer score;
+    private Float score;
     private String rentCost;
     private String contactNum;
     private String homepageUrl;
@@ -25,7 +25,7 @@ public class InitSpacesDTO {
 
     @Builder(builderMethodName = "of")
     private InitSpacesDTO(String name, String region, String exclusiveArea, String spaceType, String age,
-                          Integer vacantRoomCount, Integer score, String rentCost, String contactNum, String homepageUrl) {
+                          Integer vacantRoomCount, Float score, String rentCost, String contactNum, String homepageUrl) {
         this.name = name;
         this.region = region;
         this.exclusiveArea = exclusiveArea;

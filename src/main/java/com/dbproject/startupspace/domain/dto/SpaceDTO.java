@@ -1,9 +1,12 @@
 package com.dbproject.startupspace.domain.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class SpaceDTO {
     private Integer spceId;
     private Integer cnterId;
@@ -16,11 +19,11 @@ public class SpaceDTO {
     private String rentAmt;
     private String grntyAmt;
     private String seatCompany;
-    private Integer score;
+    private Float score;
 
     @Builder(builderMethodName = "of")
     public SpaceDTO(int spceId, int cnterId, String spceNm, String spceTyNm, String seatTyNm, String seatSeNm, String dvrAr,
-                    String cmnuseAr, String rentAmt, String grntyAmt, String seatCompany, int score){
+                    String cmnuseAr, String rentAmt, String grntyAmt, String seatCompany, float score){
         this.spceId = spceId;
         this.cnterId = cnterId;
         this.spceNm = spceNm;
@@ -36,7 +39,7 @@ public class SpaceDTO {
     }
 
     public static SpaceDTO create(int spceId, int cnterId, String spceNm, String spceTyNm, String seatTyNm, String seatSeNm, String dvrAr,
-                                  String cmnuseAr, String rentAmt, String grntyAmt, String seatCompany, int score) {
+                                  String cmnuseAr, String rentAmt, String grntyAmt, String seatCompany, float score) {
         return SpaceDTO.of()
                 .spceId(spceId)
                 .cnterId(cnterId)
