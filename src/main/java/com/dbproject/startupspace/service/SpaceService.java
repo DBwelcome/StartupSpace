@@ -12,6 +12,7 @@ import com.dbproject.startupspace.repository.MetrospaceEntityRepository;
 import com.dbproject.startupspace.repository.ProvincialCenterEntityRepository;
 import com.dbproject.startupspace.repository.ProvspaceEntityRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.List;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class SpaceService {
 
