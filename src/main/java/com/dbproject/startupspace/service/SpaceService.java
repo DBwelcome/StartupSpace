@@ -78,8 +78,7 @@ public class SpaceService {
         return initSpacesDTOs;
     }
 
-
-
+    int cnt = 0;
     public List<InitSpacesDTO> searchSpace(String region, String exclusiveArea, String Age,
                                            String rentCost, String spaceType, String vacantRoomCount) {
         List<MetrospaceEntity> metrospaceEntities = metrospaceEntityRepository.findAll();
@@ -127,9 +126,14 @@ public class SpaceService {
                     && (rentCost == null || (rc >= rr && rc <= rr + 10) || rc >= 50) && (st.equals(spaceType) || spaceType == null)
                     && (vacantRoomCount == null || (vrc >= vrc2 && vrc <= vrc2 + 10) || vrc >= 50)){
                 initSpacesDTOs.add(InitSpacesDTO.createMetroSpace(spaceDto, metropolitanCenterEntity, emptySpaceCount));
+                cnt++;
+            }
+            if(cnt == 10){
+                break;
             }
         }
 
+        cnt = 0;
         for (ProvspaceEntity provspaceEntity : provspaceEntities) {
             SpaceDTO spaceDto = SpaceDTO.create(
                     provspaceEntity.getSpaceId(), provspaceEntity.getProvincialCenterEntity().getCenterId(),
@@ -171,6 +175,10 @@ public class SpaceService {
                     && (rentCost == null || (rc >= rr && rc <= rr + 10) || rc >= 50) && (st.equals(spaceType) || spaceType == null)
                     && (vacantRoomCount == null || (vrc >= vrc2 && vrc <= vrc2 + 10) || vrc >= 50)){
                 initSpacesDTOs.add(InitSpacesDTO.createProvinceSpace(spaceDto, provincialCenterEntity, emptySpaceCount));
+                cnt++;
+            }
+            if(cnt == 10){
+                break;
             }
         }
 
