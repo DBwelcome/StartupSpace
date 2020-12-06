@@ -98,13 +98,13 @@ public class SpaceService {
             int a = metropolitanCenterEntity.getTarget();
             String age = null;
             if(a == 1) {
-                age = "중장년";
+                age = "1";
             }else if(a == 0){
-                age = "청년";
+                age = "0";
             }
             String re = metrospaceEntity.getRent().replace(",", "");
             int rc = parseInt(re);
-            int rr = 99999999;
+            int rr = 999;
             if(rentCost != null){
                 rr = parseInt(rentCost);
             }
@@ -114,9 +114,9 @@ public class SpaceService {
             if(vacantRoomCount != null){
                 vrc2 = parseInt(vacantRoomCount);
             }
-            if((exclusiveArea == null || (e >= ea && e <= ea + 10)) && (r.equals(region) || region == null) && (Age == null || age.equals(Age))
-                    && (rentCost == null || (rc >= rr && rc <= rr + 100000)) && (st.equals(spaceType) || spaceType == null)
-                    && (vacantRoomCount == null || (vrc >= vrc2 && vrc <= vrc2 + 10))){
+            if((exclusiveArea == null || (e >= ea && e <= ea + 10) || ea >= 50) && (r.equals(region) || region == null) && (Age == null || age.equals(Age))
+                    && (rentCost == null || (rc >= rr && rc <= rr + 10) || rc >= 50) && (st.equals(spaceType) || spaceType == null)
+                    && (vacantRoomCount == null || (vrc >= vrc2 && vrc <= vrc2 + 10) || vrc >= 50)){
                 initSpacesDTOs.add(InitSpacesDTO.createMetroSpace(spaceDto, metropolitanCenterEntity));
             }
         }
@@ -141,13 +141,13 @@ public class SpaceService {
             int a = provincialCenterEntity.getTarget();
             String age = null;
             if(a == 1) {
-                age = "중장년";
+                age = "1";
             }else if(a == 0){
-                age = "청년";
+                age = "0";
             }
             String re = provspaceEntity.getRent().replace(",", "");
             int rc = parseInt(re);
-            int rr = 99999999;
+            int rr = 999;
             if(rentCost != null){
                 rr = parseInt(rentCost);
             }
@@ -157,9 +157,9 @@ public class SpaceService {
             if(vacantRoomCount != null){
                 vrc2 = parseInt(vacantRoomCount);
             }
-            if((exclusiveArea == null || (e >= ea && e <= ea + 10)) && (r.equals(region)|| region == null) && (Age == null || age.equals(Age))
-                    && (rentCost == null || (rc >= rr && rc <= rr + 100000)) && (st.equals(spaceType) || spaceType == null)
-                    && (vacantRoomCount == null || (vrc >= vrc2 && vrc <= vrc2 + 10))){
+            if((exclusiveArea == null || (e >= ea && e <= ea + 10) || e >= 50) && (r.equals(region)|| region == null) && (Age == null || age.equals(Age))
+                    && (rentCost == null || (rc >= rr && rc <= rr + 10) || rc >= 50) && (st.equals(spaceType) || spaceType == null)
+                    && (vacantRoomCount == null || (vrc >= vrc2 && vrc <= vrc2 + 10) || vrc >= 50)){
                 initSpacesDTOs.add(InitSpacesDTO.createProvinceSpace(spaceDto, provincialCenterEntity));
             }
         }
